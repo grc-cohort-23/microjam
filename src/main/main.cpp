@@ -8,7 +8,6 @@
 #include "mj/mj_scene.h"
 #include "mj/mj_scene_type.h"
 #include "mj/mj_title_scene.h"
-#include "mj/mj_chooser_scene.h"
 
 int main()
 {
@@ -63,10 +62,6 @@ int main()
 
                 case mj::scene_type::CREDITS:
                     scene.reset(new mj::credits_scene(core));
-                    break;
-                
-                case mj::scene_type::CHOOSER:
-                    scene.reset(new mj::chooser_scene(core));
                     break;
 
                 default:
