@@ -1,4 +1,4 @@
-#include "aub_test_game.h"
+#include "sno_test_game.h"
 
 #include "bn_keypad.h"
 #include "bn_display.h"
