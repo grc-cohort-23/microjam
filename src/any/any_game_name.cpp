@@ -1,5 +1,6 @@
 #include "any_game_name.h"
 #include "bn_sprite_items_astronaut.h"
+#include "bn_sprite_items_platform.h"
 
 #include "bn_keypad.h"
 #include "bn_display.h"
@@ -26,8 +27,16 @@ namespace any {
 any_game_name::any_game_name([[maybe_unused]] int completed_games, [[maybe_unused]] const mj::game_data& data) :
     mj::game("any")
     {
+        _platforms[0] = {0, 40 };
+        _platforms[1] = {-30, 10 };
+        _platforms[2] = {30, -20 };
+
+        _platform_sprite_1 = bn::sprite_items::platform.create_sprite(_platforms[0].y + 4, _platforms[0].x); 
+        _platform_sprite_2 = bn::sprite_items::platform.create_sprite(_platforms[1].y + 4, _platforms[1].x); 
+        _platform_sprite_3 = bn::sprite_items::platform.create_sprite(_platforms[2].y + 4, _platforms[2].x); 
         _astronaut_sprite = bn::sprite_items::astronaut.create_sprite(0, -20);
         _player.emplace(*_astronaut_sprite);
+
     }
 
 
@@ -55,7 +64,20 @@ mj::game_result any_game_name::play([[maybe_unused]] const mj::game_data& data){
 }
 
 bool any_game_name::victory() const {
-    return _player && _player->y() < -40;
+    if (!_player) {
+        return false;
+    }
+    if (_player->y() > 80) {
+        return false;
+    }
+    if (_player->y() < -40) {
+        return true;
+    }
+
+
+    
+    //return _player && _player->y() < -40;
+    return false;
 }
 
 void any_game_name::fade_in([[maybe_unused]]const mj::game_data& data)

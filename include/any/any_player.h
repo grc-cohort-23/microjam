@@ -24,6 +24,10 @@ public:
         _dy += 0.2;
         _sprite.set_y(_sprite.y() + _dy);
 
+       
+
+
+
         if (_dy > 0) {
             for (const platform& p : platforms) {
                 if (_sprite.y() >= p.y - 5 && _sprite.y() <= p.y + 2 &&
