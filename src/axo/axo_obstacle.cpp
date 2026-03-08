@@ -34,4 +34,9 @@ void obstacle::update(player& player){
     _sprite.set_x(_sprite.x() + _speed);
 
 }
+
+bn::rect obstacle::bounding_box() const {
+        return create_bounding_box(_sprite, _size);
+    }
+
 }

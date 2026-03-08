@@ -36,7 +36,11 @@ class player {
          */
         void update();
 
+        bn::rect bounding_box() const;
+
         bool alive() const;
+
+        void kill();
     
     private:
         // The sprite to display the player
@@ -45,7 +49,7 @@ class player {
         bn::fixed _speed;
         bn::size _size;
         bn::rect _bounding_box() const;
-
+        bool _alive = true;
 };
 
 }

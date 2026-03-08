@@ -33,6 +33,8 @@ class obstacle {
          */
         void update(player& player);
 
+        bn::rect bounding_box() const;
+
         //Out of bounds not needed for obstacle, meant to leave screen anyways
     
     private:

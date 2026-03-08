@@ -78,7 +78,7 @@ mj::game_result axo_aquatic_galaxy_defense::play([[maybe_unused]] const mj::game
     // spawn single obstacle and update it
     _obstacle.update(_player);
     if(_player.bounding_box().intersects(_obstacle.bounding_box())){
-        _player._still_alive = false;
+        _player.kill();
     }
 
     // Creates a game result indicating whether the game is finished and whether the title should be hidden early

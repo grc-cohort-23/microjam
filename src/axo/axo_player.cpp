@@ -14,7 +14,8 @@ namespace axo {
  */
 static bn::rect create_bounding_box(bn::sprite_ptr _sprite, bn::size box_size)
 {
-    return bn::rect(bn::fixed_point(_sprite.x(), _sprite.y()), box_size);
+    return bn::rect(bn::point(_sprite.x().right_shift_integer(), 
+        _sprite.y().right_shift_integer()), box_size);
 }
 
 /**
@@ -61,11 +62,18 @@ void player::update() {
         _sprite.set_y(MAX_Y);
     }
 
-
 }
-    bool player::alive() const {
-        return true;
+
+    bn::rect player::bounding_box() const {
+        return create_bounding_box(_sprite, _size);
     }
 
+    bool player::alive() const {
+        return _alive;
+    }
+
+    void player::kill() {
+        _alive = false;
+    }
 
 }
