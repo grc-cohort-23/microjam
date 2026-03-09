@@ -5,6 +5,7 @@
 
 #include "mj/mj_game.h"
 #include "sno/player.h"
+#include "sno/black_hole.h"
 
 
 // All game functions/classes/variables/constants scoped to the namespace
@@ -78,6 +79,7 @@ class sno_test_game : public mj::game
     private:
         // The character that the player can move
         player _player;
+        black_hole _black_hole;
 };
 
 }
