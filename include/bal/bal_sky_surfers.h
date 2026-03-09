@@ -32,6 +32,7 @@ namespace bal
         bn::vector<rock, 20> _rocks;
         int _spawn_rocks;
         bn::random _rng;
+        bool _player_intersects;
 
 };
 
