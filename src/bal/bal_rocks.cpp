@@ -12,13 +12,13 @@ namespace bal{
     bool rock::update(){
         sprite.set_y(sprite.y() + speed);
         bounding_box = bn::rect(
-        sprite.x().round_integer(),
-        sprite.y().round_integer(),
-        size.width(),
-        size.height()
-    );
+            sprite.x().round_integer(),
+            sprite.y().round_integer(),
+            size.width(),
+            size.height()
+        );
 
-    //checks if rock has reached the bottom
-    return sprite.y() > MAX_Y;
+        //checks if rock has reached the bottom
+        return sprite.y() > MAX_Y;
     }
 }

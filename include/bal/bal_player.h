@@ -7,14 +7,11 @@
 #include <bn_rect.h>
 #include <bn_size.h>
 
+#include "bal_screen_size.h"
+
 namespace bal
 {
 class player{
-        //GBA screen size
-        static constexpr int MAX_X = bn::display::width() / 2;
-        static constexpr int MIN_X = - bn::display::width() / 2;
-        static constexpr int MAX_Y = bn::display::height() / 2;
-        static constexpr int MIN_Y = - bn::display::height() / 2;
 
     public:
         player(bn::fixed_point starting_position, bn::fixed speed);

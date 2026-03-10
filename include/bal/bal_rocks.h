@@ -7,24 +7,24 @@
 #include <bn_rect.h>
 #include <bn_size.h>
 
+#include "bal_screen_size.h"
+
 namespace bal{
 
 class rock{
-        //GBA screen size
-        static constexpr int MAX_X = bn::display::width() / 2;
-        static constexpr int MIN_X = - bn::display::width() / 2;
-        static constexpr int MAX_Y = bn::display::height() / 2;
-        static constexpr int MIN_Y = - bn::display::height() / 2;
 
     public:
         rock(int starting_x, int starting_y, bn::fixed speed, bn::size rock_size);
 
         bool update();
-
+        
+        bn::rect bounding_box;
+    
+    private :
         bn::sprite_ptr sprite;
         bn::fixed speed;
         bn::size size;
-        bn::rect bounding_box;
+       
 };
 
 }
