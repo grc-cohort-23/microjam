@@ -53,12 +53,12 @@ namespace sno
             _player_captured = true;
         }
 
-        _frames_elapsed++;
+        // _frames_elapsed++;
 
-        bool time_up = _frames_elapsed >= total_frames();
-        bool game_over = _player_captured || time_up;
+        // bool time_up = _frames_elapsed >= total_frames();
+        // bool game_over = _player_captured || time_up;
 
-        mj::game_result result(_player_captured, game_over);
+        mj::game_result result(_player_captured, false);
         return result;
     }
 
