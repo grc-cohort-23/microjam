@@ -11,7 +11,7 @@
 namespace
 {
     constexpr bn::string_view code_credits[] = {"Andrew Onjang & Mason Sabin"};
-    constexpr bn::string_view graphics_credits[] = {"TBD..."};
+    constexpr bn::string_view graphics_credits[] = {"Mason Sabin"};
     constexpr bn::string_view sfx_credits[] = {""};
     constexpr bn::string_view music_credits[] = {""};
 }
