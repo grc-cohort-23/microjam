@@ -11,7 +11,7 @@ namespace sno
 {
 
     /**
-     * aub_test_game is a class representing a microgame where the player must leave the screen.
+     * sno_test_game is a class representing a microgame where the player must avoid the blackhole.
      *
      * Like all microgames, it is a public subclass of mj::game
      */
@@ -19,7 +19,7 @@ namespace sno
     {
     public:
         /**
-         * Constructor for an instance of an aub_test_game
+         * Constructor for an instance of an sno_test_game
          *
          * @param completed_games how many microgames the player has completed so far
          * @param data shared information, such as a rng and number of frames left in the microgame
