@@ -42,9 +42,9 @@ axo_aquatic_galaxy_defense::axo_aquatic_galaxy_defense([[maybe_unused]] int comp
         _player(player({20, 0}, 2, PLAYER_SIZE)),
         _obstacles()
         {
-            _obstacles.push_back(obstacle(-100, 0, 1, OBSTACLE_SIZE));
-            _obstacles.push_back(obstacle(-100, -50, 1, OBSTACLE_SIZE));
-            _obstacles.push_back(obstacle(-100, 50, 1, OBSTACLE_SIZE));
+            _obstacles.push_back(obstacle(-150, 0, 1, OBSTACLE_SIZE));
+            _obstacles.push_back(obstacle(-200, -50, 1, OBSTACLE_SIZE)); // 50 increment to x value making obstacles spawn off-set.
+            _obstacles.push_back(obstacle(-250, 50, 1, OBSTACLE_SIZE));
         }
 
 /**
@@ -53,7 +53,7 @@ axo_aquatic_galaxy_defense::axo_aquatic_galaxy_defense([[maybe_unused]] int comp
  * Must be <= 16 characters long
  */
 bn::string<16> axo_aquatic_galaxy_defense::title() const {
-    return "Survive!";
+    return "Shoot the rocks!";
 }
 
 /**
