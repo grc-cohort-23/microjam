@@ -13,10 +13,8 @@ namespace jas
      */
     class planet
     {
-
         // (0,0) center, (0,-30) is up, (0, 30) is down
         static constexpr bn::fixed_point PLANET_POSITION = {0, 50};
-
 
     public:
         /**
@@ -26,11 +24,9 @@ namespace jas
 
         void set_visibility(bool setting);
 
-
     private:
         // The bg to display the planet
         bn::regular_bg_ptr _bg;
-
     };
 }
 
