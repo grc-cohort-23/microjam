@@ -3,7 +3,6 @@
 #include <bn_keypad.h>
 #include <bn_regular_bg_ptr.h>
 
-#include "bn_regular_bg_items_jas_planet_bg.h"
 #include "bn_regular_bg_items_temp_planet_choc_milk.h"
 
 // All game functions/classes/variables/constants scoped to the namespace

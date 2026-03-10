@@ -27,18 +27,19 @@ MJ_GAME_LIST_ADD_SFX_CREDITS(sfx_credits)
 namespace aub
 {
 
-    /**
-     * Constructor for an instance of an aub_test_game
-     *
-     * First item in the initializer list MUST be a call to the superclass, mj::game with the identifier for the microgame.
-     *
-     * @param completed_games how many microgames the player has completed so far
-     * @param data shared information, such as a rng and number of frames left in the microgame
-     */
-    aub_test_game::aub_test_game([[maybe_unused]] int completed_games, [[maybe_unused]] const mj::game_data &data) : mj::game("aub"),
-                                                                                                                     _player(player({20, 0}, 2))
-    {
-    }
+/**
+ * Constructor for an instance of an aub_test_game
+ * 
+ * First item in the initializer list MUST be a call to the superclass, mj::game with the identifier for the microgame.
+ * 
+ * @param completed_games how many microgames the player has completed so far
+ * @param data shared information, such as a rng and number of frames left in the microgame
+ */
+aub_test_game::aub_test_game([[maybe_unused]] int completed_games, [[maybe_unused]] const mj::game_data& data) :
+    mj::game("aub"),
+    _player(player({20, 0},
+                   _recommended_player_speed(recommended_difficulty_level(completed_games, data))))
+    {}
 
     /**
      * The instructions given to the player at the beginning of the microgame.
@@ -50,15 +51,25 @@ namespace aub
         return "Leave the screen";
     }
 
-    /**
-     * How long the timer for the game should be set to in frames.
-     *
-     * GBA runs at approx 60 frames per second.
-     */
-    int aub_test_game::total_frames() const
-    {
-        return 300; // 300 frames at 60fps = 5 seconds
-    }
+// Returns progressively slower player speeds the harder the difficulty
+// The slower the player moves, the harder it is to leave the screen before the timer ends
+bn::fixed aub_test_game::_recommended_player_speed(mj::difficulty_level difficulty) {
+    if(difficulty == mj::difficulty_level::EASY) {
+        return 2;
+    } else if (difficulty == mj::difficulty_level::NORMAL) {
+        return 1;
+    } 
+    return .5;
+}
+
+/**
+ * How long the timer for the game should be set to in frames.
+ * 
+ * GBA runs at approx 60 frames per second.
+ */
+int aub_test_game::total_frames() const {
+    return 300; // 300 frames at 60fps = 5 seconds
+}
 
     /**
      * play is repeatedly called while the microgame is playing.
