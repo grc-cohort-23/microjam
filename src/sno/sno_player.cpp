@@ -83,13 +83,13 @@ namespace sno
         return _sprite.position();
     }
 
-    bool player::collides_with(bn::fixed_point other_position, int radius) const
+    bool player::collides_with(bn::fixed_point other_position, int perimeter) const
     {
         bn::fixed dx = _sprite.x() - other_position.x();
         bn::fixed dy = _sprite.y() - other_position.y();
 
         // Check if within a square bounding box around the black hole
-        return (dx > -radius && dx < radius) &&
-               (dy > -radius && dy < radius);
+        return (dx > -perimeter && dx < perimeter) &&
+               (dy > -perimeter && dy < perimeter);
     }
 }

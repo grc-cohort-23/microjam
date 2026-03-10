@@ -56,9 +56,9 @@ namespace sno
          * Returns whether the player has collided with a given position
          *
          * @param other_position position to check collision against
-         * @param radius how many pixels counts as a collision
+         * @param perimeter how many pixels counts as a collision
          */
-        bool collides_with(bn::fixed_point other_position, int radius) const;
+        bool collides_with(bn::fixed_point other_position, int perimeter) const;
 
     private:
         // The sprite to display the player
