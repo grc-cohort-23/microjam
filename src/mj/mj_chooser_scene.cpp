@@ -10,7 +10,7 @@
 #include <bn_color.h>
 #include <bn_keypad.h>
 #include <bn_fixed_point.h>
-
+// Tutor debug
 #include "bn_sprite_items_mj_dot.h"
 
 namespace mj {
