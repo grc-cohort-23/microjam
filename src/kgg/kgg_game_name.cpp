@@ -63,6 +63,19 @@ mj::game_result kgg_game_name::play([[maybe_unused]] const mj::game_data& data)
     for(rock& r : _rocks)
     {
         r.update();
+
+        // if rocks touch the player then game over
+        if(r.collides_with(_player.x(), _player.y()))
+        {
+            _victory = false;
+            _game_over = true;
+        }
+    }
+
+    // if game is not over, then player win the game
+    if(!_game_over)
+    {
+        _victory = true;
     }
 
     return mj::game_result();
