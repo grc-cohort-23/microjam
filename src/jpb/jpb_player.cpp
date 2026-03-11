@@ -6,7 +6,7 @@ namespace jpb {
     jpb_player::jpb_player(bn::fixed_point starting_position, bn::fixed_point enemy_position, bn::fixed speed) :
         _player_sprite(bn::sprite_items::jpb_ship.create_sprite(starting_position)),
         _enemy_sprite(bn::sprite_items::jpb_ship.create_sprite(enemy_position)),
-        _speed(_speed)
+        _speed(speed)
     {}
 
     void jpb_player::update() {
