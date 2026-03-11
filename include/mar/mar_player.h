@@ -33,8 +33,7 @@ namespace mar
         /**
          * returns
          */
-        bn::rect getHitBox();
-
+        bn::rect &rect() { return _rect; }
 
         /**
          * Reads from the d-pad and moves the player by one frame accordingly.
@@ -46,7 +45,6 @@ namespace mar
         bn::sprite_ptr _sprite;
         // The pixels/frame the player moves in each dimension
         bn::fixed _speed;
-
         bn::rect _rect;
     };
 

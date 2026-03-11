@@ -11,7 +11,7 @@ namespace mar
 {
 
     /**
-     * 
+     *
      */
     class mar_enemy
     {
@@ -32,6 +32,7 @@ namespace mar
 
         // move the enemy
         void update();
+        bn::rect &rect() { return _rect; }
 
     private:
         // The sprite to display the enemy

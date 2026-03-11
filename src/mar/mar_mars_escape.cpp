@@ -34,24 +34,20 @@ namespace mar
 
     /**
      * Constructor for an instance of an aub_test_game
-     *
-     * First item in the initializer list MUST be a call to the superclass, mj::game with the identifier for the microgame.
-     *
      * @param completed_games how many microgames the player has completed so far
      * @param data shared information, such as a rng and number of frames left in the microgame
      */
     mar_mars_escape::mar_mars_escape([[maybe_unused]] int completed_games, [[maybe_unused]] const mj::game_data &data) : mj::game("mar"),
-                                _player(mar_player({20, 0}, 2))
+                                                                                                                         _player(mar_player({20, 0}, 2))
     {
 
         bn::random rng = bn::random();
-        for(int i = 0; i < 15;i++){
+        for (int i = 0; i < 15; i++)
+        {
             enemies.push_back(mar_enemy(
-                {bn::display::width()/2, 
-                rng.get_int(-bn::display::height()/2, bn::display::height()/2)
-            },
-            1)
-        );
+                {bn::display::width() / 2,
+                 rng.get_int(-bn::display::height() / 2, bn::display::height() / 2)},
+                1));
             rng.update();
         }
     }
@@ -90,28 +86,22 @@ namespace mar
     {
         // update the player position
         _player.update();
-        
-        for(int i = 0; i < 15; i++){
+        for (int i = 0; i < enemies.size(); i++)
+        {
             enemies[i].update();
+            if (_player.rect().intersects(enemies[i].rect()))
+            {
+                collision = true;
+                return mj::game_result(true, false);
+            }
         }
-
-        
-
-        // Creates a game result indicating whether the game is finished and whether the title should be hidden early
-        // For this game the game should end early if the player has won (if victory returns true)
-        // The title is not hidden early (false is passed), so the title disappears at the default time
-        mj::game_result result(victory(), false);
-        return result;
+        return mj::game_result(false, false);
     }
 
-    /**
-     * Returns whether the player has won the microgame.
-     *
-     * In this particular microgame the player wins if they make the ball leave the screen.
-     */
-    bool mar_mars_escape::victory() const 
+    bool mar_mars_escape::victory() const
     {
-        return _player.out_of_bounds();
+        return !collision;
+        ;
     }
 
     /**
@@ -131,5 +121,4 @@ namespace mar
     void mar_mars_escape::fade_out([[maybe_unused]] const mj::game_data &data)
     {
     }
-
 }

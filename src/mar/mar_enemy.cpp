@@ -1,6 +1,7 @@
 #include "mar/mar_enemy.h"
 #include "bn_sprite_items_dot.h"
 
+
 namespace mar{
 	/**
      * mar_player constructor
@@ -27,5 +28,6 @@ namespace mar{
     void mar_enemy::update()
     {
         _sprite.set_x(_sprite.x() - _speed);
+        _rect.set_position(_sprite.x().round_integer(), _sprite.y().round_integer()); 
     }
 }
