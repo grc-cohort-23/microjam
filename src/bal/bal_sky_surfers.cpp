@@ -28,10 +28,9 @@ bal_sky_surfers::bal_sky_surfers([[maybe_unused]] int completed_games, [[maybe_u
     mj::game("bal"),
     _bal_player(player({0, 60}, 2)),
     _spawn_rocks(),
-    _player_intersects(false)
+    _player_intersects(false),
+    _rng(data.random)
     {}
-
-bn::random _rng;
 
 bn::string<16> bal_sky_surfers::title() const {
     return "Dodge the rocks";

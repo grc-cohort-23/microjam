@@ -21,9 +21,9 @@ class rock{
         bn::rect bounding_box;
     
     private :
-        bn::sprite_ptr sprite;
-        bn::fixed speed;
-        bn::size size;
+        bn::sprite_ptr _sprite;
+        bn::fixed _speed;
+        bn::size _size;
        
 };
 
