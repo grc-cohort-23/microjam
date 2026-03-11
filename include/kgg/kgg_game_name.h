@@ -33,7 +33,8 @@ private:
     bool _game_over = false; // helps stop the game once player gets hit
     int _spawn_timer = 0; // helps deciding when to create a new rock
     bn::vector<rock, 16> _rocks; // this can store up to 16 rocks
-
+    bn::fixed _rock_speed{}; // rock speed variable
+    bn::fixed _recommended_rock_speed(mj::difficulty_level difficulty);
 
 };
 
