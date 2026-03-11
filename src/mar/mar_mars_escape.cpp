@@ -7,7 +7,9 @@
 #include <bn_random.h>
 #include <bn_vector.h>
 
+
 #include "mj/mj_game_list.h"
+#include "mj/mj_game_data.h"
 
 // String arrays for the credits can go in an anonymous namespace
 namespace
@@ -35,21 +37,22 @@ namespace mar
      * @param data shared information, such as a rng and number of frames left in the microgame
      */
     mar_mars_escape::mar_mars_escape([[maybe_unused]] int completed_games, [[maybe_unused]] const mj::game_data &data) : mj::game("mar"),
-                                                                                                                         _player(mar_player({20, 0}, 2))
+    _player(mar_player({20, 0}, 2))
     {
 
-        bn::random rng = bn::random();
+        // bn::random rng = bn::random();
         for (int i = 0; i < 15; i++)
         {
             enemies.push_back(mar_enemy(
-                {MAX_X,rng.get_int(MIN_Y, MAX_Y)},1));
-            rng.update();
+                {MAX_X / 2,
+                 data.random.get_int(MIN_Y / 2, MAX_Y / 2)},
+                1));
+            data.random.update();
         }
     }
 
     /**
-     * The instructions given to the player at the beginning of the microgame.
-     *
+     * Game title shown at the beginning of the microgame and breif description of game.
      * Must be <= 16 characters long
      */
     bn::string<16> mar_mars_escape::title() const
@@ -58,9 +61,8 @@ namespace mar
     }
 
     /**
-     * How long the timer for the game should be set to in frames.
-     *
      * GBA runs at approx 60 frames per second.
+     * Game last a maximum of 10 seconds, but can end early if the player collides with an enemy.
      */
     int mar_mars_escape::total_frames() const
     {
@@ -69,11 +71,6 @@ namespace mar
 
     /**
      * play is repeatedly called while the microgame is playing.
-     *
-     * You can think of it as what previously was in the while event loop.
-     * You do NOT need to write your own while event loop
-     * You do NOT need to call bn::core::update()
-     *
      * @param data shared information, such as a rng and number of frames left in the microgame
      * @return the mj::game result indicating whether the game has finished and whether the title should be hidden
      */
@@ -81,6 +78,8 @@ namespace mar
     {
         // update the player position
         _player.update();
+
+        // update the enemy positions and check for collisions
         for (int i = 0; i < enemies.size(); i++)
         {
             enemies[i].update();
