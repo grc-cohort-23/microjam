@@ -13,6 +13,11 @@ namespace bal{
 
 class rock{
 
+    private:
+        bn::sprite_ptr _sprite;
+        bn::fixed _speed;
+        bn::size _size;
+
     public:
         rock(int starting_x, int starting_y, bn::fixed speed, bn::size rock_size);
 
@@ -20,10 +25,7 @@ class rock{
         
         bn::rect bounding_box;
     
-    private :
-        bn::sprite_ptr _sprite;
-        bn::fixed _speed;
-        bn::size _size;
+    
        
 };
 

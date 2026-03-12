@@ -13,17 +13,19 @@ namespace bal
 {
 class player{
 
+    private:
+        // The sprite to display the player
+        bn::sprite_ptr _sprite;
+        // The pixels/frame the player moves in each dimension
+        bn::fixed _speed;
+
     public:
         player(bn::fixed_point starting_position, bn::fixed speed);
         void update();
 
         bn::rect bounding_box;
 
-    private:
-        // The sprite to display the player
-        bn::sprite_ptr _sprite;
-        // The pixels/frame the player moves in each dimension
-        bn::fixed _speed;
+    
 };
 
 }
