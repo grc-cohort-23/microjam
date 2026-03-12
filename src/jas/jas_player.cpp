@@ -30,7 +30,7 @@ namespace jas
         if (bn::keypad::a_held())
         {
             // Add BOOST_ACCELERATION to the player's speed.
-            engineOn(BOOST_ACCELERATION);
+            engineOn(_gravity*2);
         }
         // If the player has already crashed, or is about to
         if (crashed() || (on_surface() && at_crash_velocity()))

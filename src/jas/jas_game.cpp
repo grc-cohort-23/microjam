@@ -53,14 +53,15 @@ namespace jas
     bn::fixed jas_game::_recommended_difficulty_multiplier(mj::difficulty_level difficulty){
         if (difficulty == mj::difficulty_level::EASY)
         {
-            return .025;
+            return .02;
         }
         else if (difficulty == mj::difficulty_level::NORMAL)
         {
-            return .04;
+            return .035;
         }
-        return .05;
+        return .045;
     }
+    
     /**
      * How long the timer for the game should be set to in frames.
      *
