@@ -42,8 +42,8 @@ namespace mar
         for (int i = 0; i < 15; i++)
         {
             enemies.push_back(mar_enemy(
-                {MAX_X / 2,
-                 data.random.get_int(MIN_Y / 2, MAX_Y / 2)},
+                {data.random.get_int(MAX_X, MAX_X*3),
+                 data.random.get_int(MIN_Y, MAX_Y)},
                 1));
             data.random.update();
         }
@@ -86,6 +86,14 @@ namespace mar
                 collision = true;
                 // if collision is true stop the game, keep title visible (false)
                 return mj::game_result(true, false);
+            }
+            if(enemies[i].isPassed()){
+                enemies[i].set_position(
+                    {
+                        data.random.get_int(MAX_X,MAX_X*2),
+                        data.random.get_int(MIN_Y,MAX_Y)
+                    }
+                );
             }
         }
         // no collision keep the game running, keep title visible (false)
