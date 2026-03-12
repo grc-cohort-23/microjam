@@ -13,7 +13,7 @@ namespace mar
     {
     public:
         /**
-         * Constructor for an instance of an aub_test_game
+         * Constructor for an instance of an mar_mars_escape
          *
          * @param completed_games how many microgames the player has completed so far
          * @param data shared information, such as a rng and number of frames left in the microgame
@@ -72,6 +72,7 @@ namespace mar
         mar_player _player;
 
         bn::vector<mar_enemy, 15> enemies;
+        
         bool collision = false;
     };
 }

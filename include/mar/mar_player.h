@@ -1,4 +1,4 @@
-#ifndef MAR_PLAYER_H // Include guard must start with the 3-letter id
+#ifndef MAR_PLAYER_H 
 #define MAR_PLAYER_H
 
 #include <bn_fixed_point.h>

@@ -4,10 +4,10 @@
 
 namespace mar{
 	/**
-     * mar_player constructor
+     * mar_enemy constructor
      *
-     * @param starting_position the location to start the mar_player at
-     * @param speed the pixels/frame the mar_player moves at in each dimension
+     * @param starting_position the location to start the mar_enemy at
+     * @param speed the pixels/frame the mar_enemy moves at in each dimension
      */
     mar_enemy::mar_enemy(
         bn::fixed_point starting_position, 
@@ -24,7 +24,7 @@ namespace mar{
             )
     {
     }
-
+    // update the enemy's position by moving it left and updating the collision rectangle's position
     void mar_enemy::update()
     {
         _sprite.set_x(_sprite.x() - _speed);

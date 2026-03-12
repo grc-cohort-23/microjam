@@ -39,8 +39,6 @@ namespace mar
     mar_mars_escape::mar_mars_escape([[maybe_unused]] int completed_games, [[maybe_unused]] const mj::game_data &data) : mj::game("mar"),
     _player(mar_player({20, 0}, 2))
     {
-
-        // bn::random rng = bn::random();
         for (int i = 0; i < 15; i++)
         {
             enemies.push_back(mar_enemy(
@@ -86,12 +84,14 @@ namespace mar
             if (_player.rect().intersects(enemies[i].rect()))
             {
                 collision = true;
+                // if collision is true stop the game, keep title visible (false)
                 return mj::game_result(true, false);
             }
         }
+        // no collision keep the game running, keep title visible (false)
         return mj::game_result(false, false);
     }
-
+    // true = player survived (no collision), false = player was hit (collision)
     bool mar_mars_escape::victory() const
     {
         return !collision;
