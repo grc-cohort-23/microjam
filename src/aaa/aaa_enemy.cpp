@@ -1,6 +1,7 @@
 #include "aaa/aaa_enemy.h"
 #include <bn_math.h>
 #include "bn_sprite_items_aaa_enemy.h"
+#include <bn_rect.h>
 
 namespace aaa
 {
@@ -11,8 +12,13 @@ namespace aaa
      * @param speed the pixels/frame the enemy moves at in each dimension
      */
     aaa_enemy::aaa_enemy(bn::fixed_point starting_position, bn::fixed speed) : _sprite(bn::sprite_items::aaa_enemy.create_sprite(starting_position)),
-                                                                               _speed(speed)
+                                                                               _speed(speed),
+                                                                               _boundingBox(_sprite.x().round_integer(),
+                                                                                            _sprite.y().round_integer(),
+                                                                                            15,
+                                                                                            15)
     {
+        _sprite.set_z_order(3); // its sprite layer order under players
     }
 
     void aaa_enemy::update()
@@ -24,6 +30,14 @@ namespace aaa
         if (dist > 0)
         {
             _sprite.set_position(_sprite.position() - (_sprite.position() / dist) * _speed);
+            _boundingBox = bn::rect(_sprite.x().round_integer(),
+                                    _sprite.y().round_integer(),
+                                    15, 15);
         }
+    }
+
+    bn::rect aaa_enemy::getRect()
+    {
+        return _boundingBox;
     }
 }
