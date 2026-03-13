@@ -28,7 +28,7 @@ MJ_GAME_LIST_ADD_SFX_CREDITS(sfx_credits)
 namespace sno
 {
     sno_test_game::sno_test_game([[maybe_unused]] int completed_games, [[maybe_unused]] const mj::game_data &data) : mj::game("sno"),
-                                                                                                                     _player(sno::player({50, 30}, 2)),
+                                                                                                                     _player(sno::player({50, 30}, _recommended_player_speed(recommended_difficulty_level(completed_games, data)))),
                                                                                                                      _black_hole(sno::black_hole({0, 0}))
     {
     }
@@ -37,6 +37,17 @@ namespace sno
     {
         return "Avoid the void!";
     }
+
+// Returns a stronger black hole attraction the harder the difficulty
+    bn::fixed sno_test_game::_recommended_player_speed(mj::difficulty_level difficulty) {
+        if(difficulty == mj::difficulty_level::EASY) {
+            return 2;
+        } else if(difficulty == mj::difficulty_level::NORMAL) {
+            return 1.5;
+        } 
+        return 1;
+    }
+
 
     int sno_test_game::total_frames() const
     {
