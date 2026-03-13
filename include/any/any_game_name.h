@@ -7,6 +7,8 @@
 #include "mj/mj_game.h"
 #include "any_player.h"
 #include "bn_sprite_items_astronaut.h"
+#include "bn_sprite_text_generator.h"
+#include "bn_regular_bg_ptr.h"
 
 namespace any {
 
@@ -80,6 +82,8 @@ namespace any {
 
      bn::optional<bn::sprite_ptr> _moon_sprite;
      bn::fixed _moon_y = -60;
+     bn::vector<bn::sprite_ptr, 8> _text_sprites;
+     bn::optional<bn::regular_bg_ptr> _background;
 };
 
 }
