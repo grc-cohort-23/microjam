@@ -35,7 +35,7 @@ namespace bal
         bool _player_intersects;
         int _difficulty_level;
         void spawn_rock();
-        bn::fixed _recommended_player_speed(mj::difficulty_level difficulty);
+        int _recommended_player_speed(mj::difficulty_level difficulty);
 };
 
 }

@@ -28,16 +28,16 @@ bal_sky_surfers::bal_sky_surfers([[maybe_unused]] int completed_games, [[maybe_u
     mj::game("bal"),
     _bal_player(player({0, 60}, 2)),
     _spawn_rocks(0),
-    _difficulty_level(_recommended_player_speed(recommended_difficulty_level(completed_games, data))),
+    _rng(data.random),
     _player_intersects(false),
-    _rng(data.random)
+    _difficulty_level(_recommended_player_speed(recommended_difficulty_level(completed_games, data)))
     {}
 
 
 bn::string<16> bal_sky_surfers::title() const {
     return "Dodge the rocks";
 }
-bn::fixed bal_sky_surfers::_recommended_player_speed(mj::difficulty_level difficulty) {
+int bal_sky_surfers::_recommended_player_speed(mj::difficulty_level difficulty) {
     if(difficulty == mj::difficulty_level::EASY) {
         return 3;
     } else if (difficulty == mj::difficulty_level::NORMAL) {
