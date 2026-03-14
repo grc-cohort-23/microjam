@@ -27,13 +27,23 @@ namespace bal
 bal_sky_surfers::bal_sky_surfers([[maybe_unused]] int completed_games, [[maybe_unused]] const mj::game_data& data) :
     mj::game("bal"),
     _bal_player(player({0, 60}, 2)),
-    _spawn_rocks(),
+    _spawn_rocks(0),
+    _rng(data.random),
     _player_intersects(false),
-    _rng(data.random)
+    _difficulty_level(_recommended_player_speed(recommended_difficulty_level(completed_games, data)))
     {}
+
 
 bn::string<16> bal_sky_surfers::title() const {
     return "Dodge the rocks";
+}
+int bal_sky_surfers::_recommended_player_speed(mj::difficulty_level difficulty) {
+    if(difficulty == mj::difficulty_level::EASY) {
+        return 3;
+    } else if (difficulty == mj::difficulty_level::NORMAL) {
+        return 6;
+    } 
+    return 9;
 }
 
 int bal_sky_surfers::total_frames() const {
@@ -58,20 +68,14 @@ mj::game_result bal_sky_surfers::play([[maybe_unused]] const mj::game_data& data
 
     _bal_player.update();
 
-    spawn_rock();
-    spawn_rock();
-    spawn_rock();
-    spawn_rock();
-    spawn_rock();
-    spawn_rock();
-    spawn_rock();
-    spawn_rock();
-    spawn_rock();
+    for(int i=_difficulty_level; i>0; i--){
+        spawn_rock();
+    }
 
     for(int i = _rocks.size() - 1; i >= 0; i--){
         //checks if rocks are off the screen
         bool off_screen = _rocks[i].update();
-    
+        
         //checks if player got hit by a rock
         if(_rocks[i].bounding_box.intersects(_bal_player.bounding_box)){
             _player_intersects = true;
