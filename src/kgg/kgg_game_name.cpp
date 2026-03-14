@@ -3,22 +3,37 @@
 #include "mj/mj_game_list.h"
 #include "bn_display.h"
 #include "bn_random.h"
+#include "bn_regular_bg_items_kgg_background.h"
 
 
 namespace {
 constexpr bn::string_view code_credits[] = { "Gurpinder Gill" };
-constexpr bn::string_view graphics_credits[] = { "" };
+constexpr bn::string_view graphics_credits[] = { "Gurpinder Gill" };
 constexpr bn::string_view music_credits[] = { "" };
 constexpr bn::string_view sfx_credits[] = { "" };
 }  
 
 namespace kgg {
 
-kgg_game_name::kgg_game_name([[maybe_unused]] int completed_games, [[maybe_unused]] const mj::game_data& data)
-: mj::game("kgg")
+bn::fixed kgg_game_name::_speed(mj::difficulty_level difficulty)
 {
+    if(difficulty == mj::difficulty_level::EASY)
+    {
+        return 1.5;
+    }
+    else if(difficulty == mj::difficulty_level::NORMAL)
+    {
+        return 2.5;
+    }
+    return 4.0;
 }
 
+kgg_game_name::kgg_game_name(int completed_games, const mj::game_data& data)
+: mj::game("kgg"),
+_background(bn::regular_bg_items::kgg_background.create_bg())
+{
+    _rock_speed = _speed(recommended_difficulty_level(completed_games, data));
+}
 
 bn::string<16> kgg_game_name::title() const
 {
@@ -44,7 +59,7 @@ mj::game_result kgg_game_name::play([[maybe_unused]] const mj::game_data& data)
     // time increases by 1
     _spawn_timer++;
 
-    if(_spawn_timer >= 30) // spawn a rock every half second
+   if(_spawn_timer >= _spawn_limit) // spawn a rock every half second
     {
         _spawn_timer = 0;
 
@@ -56,7 +71,8 @@ mj::game_result kgg_game_name::play([[maybe_unused]] const mj::game_data& data)
                                           bn::display::width() / 2 - 8);
 
             // creates a rock high up, so it falls down into view                            
-            _rocks.push_back(rock(random_x, -70));
+            _rocks.push_back(rock(random_x, -70, _rock_speed));
+
         }
     }
 
