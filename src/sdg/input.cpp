@@ -1,6 +1,5 @@
 #include "sdg/input.h"
 #include <bn_keypad.h>
-#include "bn_sprite_items_sdg_arrow_sheet.h"
 #include <bn_random.h>
 #include <bn_log.h>
 

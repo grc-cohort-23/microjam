@@ -15,16 +15,18 @@
 
 #include <bn_sprite_ptr.h>
 #include <bn_sprite_animate_actions.h>
+#include <bn_regular_bg_animate_actions.h>
 
 #include "sdg_game.h"
 #include "sdg/input.h"
 #include "mj/mj_game_list.h"
 
-//Graphhics 
+//Graphics 
 #include "bn_sprite_items_arrow_up.h"
 #include "bn_sprite_items_arrow_right.h"
 #include "bn_sprite_items_arrow_down.h"
 #include "bn_sprite_items_arrow_left.h"
+#include "bn_regular_bg_items_hyperdrivebg.h"
 
 
 namespace
@@ -50,10 +52,10 @@ namespace sdg{
         // Get the randomly generated arrow pattern from the input system.
         const auto& pattern = _player.challenge();
 
-        //x strting positon, this changes as a new arrow is added
-        int start_x = -40;
+        // Initial x positon.
+        int start_x = -80;
 
-        //Starting y position, this one stays the same always
+        // Starting y position.
         int y = -40;
 
         // This array maps each number in the pattern to a specific sprite type.
@@ -64,21 +66,20 @@ namespace sdg{
             &bn::sprite_items::arrow_left
         };
 
-        //pattern.size() tells us how many arrows the player must input. So baicaly the difficulty
+        // pattern.size() tells us how many arrows the player must input. So basically the difficulty
         for(int i = 0; i < pattern.size(); ++i)
         {
-            //Each x-coordinate is spaced 20px aprt. 
-            //This needs to change because in hard difficulty the pattern doesnt fit on the screen
+            // Each x-coordinate is spaced 20px aprt. 
+            // This needs to change because in hard difficulty the pattern doesnt fit on the screen
             int x = start_x + (i * 20);
 
-            //pattern[i] returns a number from 0–3, that number says which sprite item to use from arrow_items.
+            // pattern[i] returns a number from 0–3, that number says which sprite item to use from arrow_items.
             bn::sprite_ptr sprite =
                 arrow_items[pattern[i]]->create_sprite(x, y);
 
             // Store the created sprite inside the _arrows vector.
-            _arrows.push_back(bn::move(sprite));
-
             // bn::move transfers ownership of the sprite into the vector instead of copying it
+            _arrows.push_back(bn::move(sprite));
         }
     }
 
