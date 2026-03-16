@@ -20,7 +20,7 @@ obstacle::obstacle(bn::fixed starting_x, bn::fixed starting_y, bn::fixed speed, 
     _hitbox(_sprite, _size)
 {}
 
-void obstacle::update(player& player){
+void obstacle::update([[maybe_unused]] player& player){
     // moves obstacles towards the right
     _sprite.set_x(_sprite.x() + _speed);
 }

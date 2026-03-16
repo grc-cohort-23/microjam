@@ -50,7 +50,7 @@ namespace sdg{
         return 300; // 5 seconds
     }
 
-    mj::game_result sdg_game::play(const mj::game_data& data)
+    mj::game_result sdg_game::play([[maybe_unused]] const mj::game_data& data)
     {
         _player.update();
 
