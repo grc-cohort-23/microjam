@@ -1,5 +1,6 @@
 #include "jpb/jpb_alien_shooter.h"
 #include "mj/mj_game_list.h"
+#include "bn_regular_bg_items_backdrop.h"
 
 
 namespace
@@ -27,7 +28,8 @@ namespace jpb {
                         PLAYER_SIZE)),
         _enemy(jpb_enemy({0, -30}, _recommended_enemy_speed(recommended_difficulty_level(completed_games, data)),
                         ENEMY_SIZE)),
-        _text_generator(data.text_generator)
+        _text_generator(data.text_generator),
+        _background(bn::regular_bg_items::backdrop.create_bg(0, 0))
     {}
 
     bn::string<16> jpb_alien_shooter::title() const {

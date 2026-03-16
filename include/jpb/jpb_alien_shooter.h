@@ -7,6 +7,8 @@
 #include "jpb/jpb_missile.h"
 #include <bn_vector.h>
 #include <bn_sprite_text_generator.h>
+#include "bn_regular_bg_items_backdrop.h"
+#include <bn_regular_bg_ptr.h>
 
 namespace jpb {
 
@@ -39,6 +41,8 @@ namespace jpb {
 
         bn::sprite_text_generator _text_generator;
         bn::vector<bn::sprite_ptr, 4> _ammo_sprites;
+
+        bn::regular_bg_ptr _background;
   };
 }
 
