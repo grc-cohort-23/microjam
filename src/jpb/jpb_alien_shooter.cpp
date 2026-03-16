@@ -23,10 +23,11 @@ namespace jpb {
 
     jpb_alien_shooter::jpb_alien_shooter([[maybe_unused]] int completed_games, [[maybe_unused]] const mj::game_data& data) :
         mj::game("jpb"),
-        _player(jpb_player({0, 30}, PLAYER_SIZE, 1.3)),
-        _enemy(jpb_enemy({0, -30}, ENEMY_SIZE,
-            _recommended_player_speed(recommended_difficulty_level(completed_games, data)))),
-            _text_generator(data.text_generator)
+        _player(jpb_player({0, 30}, _recommended_player_speed(recommended_difficulty_level(completed_games, data)), 
+                        PLAYER_SIZE)),
+        _enemy(jpb_enemy({0, -30}, _recommended_enemy_speed(recommended_difficulty_level(completed_games, data)),
+                        ENEMY_SIZE)),
+        _text_generator(data.text_generator)
     {}
 
     bn::string<16> jpb_alien_shooter::title() const {
@@ -34,13 +35,22 @@ namespace jpb {
     }
 
     bn::fixed jpb_alien_shooter::_recommended_player_speed(mj::difficulty_level difficulty) {
-    if (difficulty == mj::difficulty_level::EASY) {
-        return 1;
-    } else if (difficulty == mj::difficulty_level::NORMAL) {
-        return 2;
-    } 
-    return 3;
-}
+        if (difficulty == mj::difficulty_level::EASY) {
+            return 3;
+        } else if (difficulty == mj::difficulty_level::NORMAL) {
+            return 2;
+        } 
+        return 1.5;
+    }
+
+    bn::fixed jpb_alien_shooter::_recommended_enemy_speed(mj::difficulty_level difficulty) {
+        if (difficulty == mj::difficulty_level::EASY) {
+            return 1;
+        } else if (difficulty == mj::difficulty_level::NORMAL) {
+            return 2;
+        } 
+        return 3;
+    }
 
     int jpb_alien_shooter::total_frames() const {
         return 300;
@@ -59,14 +69,12 @@ namespace jpb {
             if (missile._sprite.y() == MAX_Y) {
                 _trashbin.push_back(missile);
             }
-
-            if (missile._bounding_box.intersects(_enemy._enemy_box)) {
-                _trashbin.push_back(missile);
-            }
         }
 
-        for (int i = 0; i < _trashbin.size(); i++ ) {
-            _trashbin.pop_back();
+        if (_trashbin.size() > 0) {
+            for (int i = 0; i < _trashbin.size(); i++ ) {
+                _missiles.pop_back();
+            }
         }
 
         mj::game_result result(victory(), false);
@@ -74,13 +82,7 @@ namespace jpb {
     }
 
     bool jpb_alien_shooter::victory() const {
-        bool hit = false;
-        for (jpb_missile missile : _missiles) {
-            if (_player.enemy_shot(missile._bounding_box, _enemy._enemy_box)) {
-                hit = true;
-            }
-        }
-        return hit;
+        return _enemy.enemy_shot(_missiles);
     }
 
     void jpb_alien_shooter::fade_in([[maybe_unused]] const mj::game_data& data) {
