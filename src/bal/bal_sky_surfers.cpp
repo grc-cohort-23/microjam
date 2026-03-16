@@ -45,9 +45,9 @@ bn::fixed bal_sky_surfers::_recommended_player_speed(mj::difficulty_level diffic
     if(difficulty == mj::difficulty_level::EASY) {
         return 3;
     } else if (difficulty == mj::difficulty_level::NORMAL) {
-        return 6;
+        return 5;
     } 
-    return 9;
+    return 7;
 }
 
 int bal_sky_surfers::total_frames() const {
