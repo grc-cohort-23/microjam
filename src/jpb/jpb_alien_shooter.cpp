@@ -59,17 +59,13 @@ namespace jpb {
         _enemy.update();
 
         _player.shoot(_missiles);
-        for (jpb_missile& missile : _missiles) {
-            missile.update();
-
-            if (missile._sprite.y() == MAX_Y) {
-                _trashbin.push_back(missile);
-            }
-        }
-
-        if (_trashbin.size() > 0) {
-            for (int i = 0; i < _trashbin.size(); i++ ) {
-                _missiles.pop_back();
+        
+        for (auto it = _missiles.begin(); it < _missiles.end();) {
+            it->update();
+            if (it->_sprite.y() <= MIN_Y) {
+                it = _missiles.erase(it);
+            } else {
+                it++;
             }
         }
 

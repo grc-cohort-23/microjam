@@ -9,7 +9,7 @@
 
 namespace jpb {
 
-  static constexpr int MAX_Y = bn::display::height() / 2;
+  static constexpr int MIN_Y = -bn::display::height() / 2;
 
   class jpb_alien_shooter : public mj::game {
     public: 
@@ -31,7 +31,6 @@ namespace jpb {
         jpb_player _player;
         jpb_enemy _enemy;
         bn::vector<jpb_missile, 10> _missiles;
-        bn::vector<jpb_missile, 10> _trashbin;
         bn::fixed _recommended_player_speed(mj::difficulty_level difficulty);
         bn::fixed _recommended_enemy_speed(mj::difficulty_level difficulty);
   };
