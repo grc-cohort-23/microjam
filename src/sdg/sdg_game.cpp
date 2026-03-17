@@ -119,11 +119,9 @@ namespace sdg{
         }
 
         // resets arrows when incorrect, with some angry flair
-        if (progress == 0) {
+        if (_player._incorrect_input) {
             for (int i = 0; i < _player.challenge().size(); i++) {
-                bn::sprite_animate_action<3> incorrect =
-                    bn::create_sprite_animate_action_once(_arrows[i], 8, arrow_items[pattern[i]]->tiles_item(), 0, 2, 3);
-                incorrect.update();
+                bn::create_sprite_animate_action_once(_arrows[i], 8, arrow_items[pattern[i]]->tiles_item(), 2, 3, 0).update();
             }
         }
 
