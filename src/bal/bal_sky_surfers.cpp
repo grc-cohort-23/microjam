@@ -5,6 +5,8 @@
 #include "bn_regular_bg_items_stary_bg.h"
 #include <bn_sprite_ptr.h>
 
+#include "bn_sound_items.h"
+
 namespace
 {
     constexpr bn::string_view code_credits[] = { "Pasha", "Hosea" };
@@ -34,8 +36,10 @@ bal_sky_surfers::bal_sky_surfers([[maybe_unused]] int completed_games, [[maybe_u
     _player_intersects(false),
     _difficulty_level(_recommended_player_speed(recommended_difficulty_level(completed_games, data))),
     _background(bn::regular_bg_items::stary_bg.create_bg())
-
-    {}
+    {
+        //play_sound(bn::sound::bal_sample, completed_games, data);
+    }
+    
 
 
 bn::string<16> bal_sky_surfers::title() const {
@@ -82,6 +86,8 @@ mj::game_result bal_sky_surfers::play([[maybe_unused]] const mj::game_data& data
         
         //checks if player got hit by a rock
         if(_rocks[i].bounding_box.intersects(_bal_player.bounding_box)){
+            //FOR WHEN EVER YOU WNAT TO PLAY IT
+            bn::sound_items::ball_explosion.play();
             _player_intersects = true;
             result.exit = true;
             return result;
