@@ -118,11 +118,12 @@ namespace sdg{
             );
         }
 
+        // resets arrows when incorrect, with some angry flair
         if (progress == 0) {
             for (int i = 0; i < _player.challenge().size(); i++) {
-                _arrows[i].set_tiles(arrow_items[pattern[i]]->tiles_item().create_tiles(2));
-                _arrows[i].set_tiles(arrow_items[pattern[i]]->tiles_item().create_tiles(3));
-                _arrows[i].set_tiles(arrow_items[pattern[i]]->tiles_item().create_tiles(0));
+                bn::sprite_animate_action<3> incorrect =
+                    bn::create_sprite_animate_action_once(_arrows[i], 8, arrow_items[pattern[i]]->tiles_item(), 0, 2, 3);
+                incorrect.update();
             }
         }
 
