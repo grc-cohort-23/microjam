@@ -6,6 +6,8 @@
 #include "bn_sprite_animate_actions.h"
 #include "bn_log.h"
 
+#include "bn_sound_items.h"
+
 #include "mj/mj_game_list.h"
 
 namespace
@@ -40,6 +42,7 @@ namespace jas
           _planet{},
           _text(data.text_generator)
     {
+        play_sound(bn::sound_items::jas_miami_bar_fight, completed_games, data);
     }
 
     /**
