@@ -4,6 +4,7 @@
 #include "bn_keypad.h"
 #include "bn_display.h"
 #include "bn_sprite_ptr.h"
+#include "bn_sound_items.h"
 
 #include "mj/mj_game_list.h"
 
@@ -28,12 +29,10 @@ namespace sno
 {
     sno_test_game::sno_test_game([[maybe_unused]] int completed_games, [[maybe_unused]] const mj::game_data &data) : mj::game("sno"),
                                                                                                                      _player(sno::player({50, 30}, _recommended_player_speed(recommended_difficulty_level(completed_games, data)))),
-                                                                                                                     _black_hole(sno::black_hole({0, 0})) {
-                                                                                                                        play_sound(bn::sound_items::sno_bg_theme, complete_games, data);
-                                                                                                                     }
+                                                                                                                     _black_hole(sno::black_hole({0, 0}))
     {
+        play_sound(bn::sound_items::sno_bg_theme, completed_games, data);
     }
-
     bn::string<16> sno_test_game::title() const
     {
         return "Avoid the void!";
