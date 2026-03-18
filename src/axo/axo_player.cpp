@@ -20,7 +20,9 @@ player::player(bn::fixed_point starting_position, bn::fixed speed, bn::size play
     _sprite(bn::sprite_items::axo_axolotl.create_sprite(starting_position)),
     _speed(speed),
     _size(player_size),
-    _hitbox(_sprite, _size)
+    _hitbox(_sprite, bn::size(14, 20), bn::fixed_point(0, -4))
+    // The player sprite has negative space around its tail, so I shrank the hitbox and slid it up.
+    // Better for close calls!
 {
 }
 
