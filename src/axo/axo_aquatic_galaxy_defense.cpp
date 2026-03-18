@@ -86,7 +86,6 @@ void axo_aquatic_galaxy_defense::destroy_obstacle(int index) {
  */
 mj::game_result axo_aquatic_galaxy_defense::play([[maybe_unused]] const mj::game_data& data)
 {
-
     // update the player position
     _player.update();
 
@@ -96,7 +95,7 @@ mj::game_result axo_aquatic_galaxy_defense::play([[maybe_unused]] const mj::game
             auto& obstacle = _obstacles[i];
             if(bubble.get_hitbox().intersects(obstacle.get_hitbox())) {
                 destroy_obstacle(i);
-                game::play_sound(bn::sound_items::rock_destroy, 0, data); // play sound if bubble hits obstacle
+                game::play_sound(bn::sound_items::rock_break, 0, data); // play sound if bubble hits obstacle
                 break;
             }
 
