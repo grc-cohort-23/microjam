@@ -49,7 +49,8 @@ axo_aquatic_galaxy_defense::axo_aquatic_galaxy_defense([[maybe_unused]] int comp
                 _obstacles.push_back(obstacle(-bn::display::width() / 2 + 20 + (i * 30), 
                 -bn::display::height(),_recommended_player_speed(recommended_difficulty_level(completed_games, data)), OBSTACLE_SIZE));
             }
-        }
+        }    
+
 
 /**
  * The instructions given to the player at the beginning of the microgame.
@@ -85,6 +86,11 @@ void axo_aquatic_galaxy_defense::destroy_obstacle(int index) {
  */
 mj::game_result axo_aquatic_galaxy_defense::play([[maybe_unused]] const mj::game_data& data)
 {
+
+    // music
+    if(data.pending_frames == total_frames()) {
+        game::play_sound(bn::sound_items::tower, 0, data);
+    }
     // update the player position
     _player.update();
 
@@ -94,10 +100,14 @@ mj::game_result axo_aquatic_galaxy_defense::play([[maybe_unused]] const mj::game
             auto& obstacle = _obstacles[i];
             if(bubble.get_hitbox().intersects(obstacle.get_hitbox())) {
                 destroy_obstacle(i);
+                game::play_sound(bn::sound_items::rock_destroy, 0, data); // play sound if bubble hits obstacle
                 //bubbles[i] = bubbles.back();
                 //bubbles.pop_back();
                 break;
             }
+
+            //if bubble is spawned play sound
+            
         }
     }
 
