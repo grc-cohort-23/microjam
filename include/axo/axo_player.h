@@ -14,6 +14,10 @@
 #include "axo/axo_hitbox.h"
 #include "axo/axo_bubble.h"
 
+// For sounds produced by player / game
+#include "bn_sound_items.h"
+#include "bn_sound.h"
+
 // All game functions/classes/variables/constants scoped to the namespace
 namespace axo {
 
