@@ -87,10 +87,6 @@ void axo_aquatic_galaxy_defense::destroy_obstacle(int index) {
 mj::game_result axo_aquatic_galaxy_defense::play([[maybe_unused]] const mj::game_data& data)
 {
 
-    // music
-    if(data.pending_frames == total_frames()) {
-        game::play_sound(bn::sound_items::tower, 0, data);
-    }
     // update the player position
     _player.update();
 
