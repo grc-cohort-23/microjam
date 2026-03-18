@@ -40,6 +40,9 @@ private:
     int _spawn_timer = 0; // helps deciding when to create a new rock
     bn::vector<rock, 16> _rocks; // this can store up to 16 rocks
     bn::regular_bg_ptr _background;
+    bool _lost = false;      // remembers that player got hit
+    int _lose_timer = 0;     // short delay before ending round
+    static constexpr int _lose_delay = 60; //about 1 second
 
 
 

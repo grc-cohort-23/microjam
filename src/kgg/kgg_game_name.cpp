@@ -59,6 +59,7 @@ int kgg_game_name::total_frames() const
 mj::game_result kgg_game_name::play([[maybe_unused]] const mj::game_data& data)
 
 {
+
     if(_game_over)
     {
         return mj::game_result();
@@ -98,6 +99,7 @@ mj::game_result kgg_game_name::play([[maybe_unused]] const mj::game_data& data)
             bn::sound_items::kgg_bomb.play();
             _victory = false;
             _game_over = true;
+            return mj::game_result{ true, true };
         }
     }
 
