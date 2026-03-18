@@ -34,7 +34,7 @@ namespace jpb {
         _text_generator(data.text_generator),
         _background(bn::regular_bg_items::backdrop.create_bg(0, 0))
         {
-            play_sound(bn::sound_items::jpb_space_bass_evil, completed_games, data);
+            play_sound(bn::sound_items::jpb_space_battle, completed_games, data);
         }
 
     bn::string<16> jpb_alien_shooter::title() const {
