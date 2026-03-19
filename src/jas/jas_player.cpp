@@ -4,7 +4,9 @@
 #include <bn_keypad.h>
 #include "bn_log.h"
 
-#include "bn_sprite_items_templander.h"
+#include "bn_sprite_items_jas_lander.h"
+#include "bn_sprite_items_jas_flames.h"
+#include "bn_sprite_items_jas_explosion.h"
 #include "jas_player.h"
 
 // All game functions/classes/variables/constants scoped to the namespace
@@ -17,11 +19,15 @@ namespace jas
      * @param starting_position the location to start the player at
      * @param speed the pixels/frame the player moves at in each dimension
      */
-    player::player(bn::fixed_point starting_position, bn::fixed vertical_speed, bn::fixed gravity) : _sprite(bn::sprite_items::templander.create_sprite(starting_position)),
+    player::player(bn::fixed_point starting_position, bn::fixed vertical_speed, bn::fixed gravity) : _sprite(bn::sprite_items::jas_lander.create_sprite(starting_position)),
                                                                                                      _vertical_speed(vertical_speed),
                                                                                                      _gravity(gravity),
-                                                                                                     _crashed(false)
+                                                                                                     _crashed(false),
+                                                                                                     _flame(bn::sprite_items::jas_flames.create_sprite(_sprite.x(), -100)),
+                                                                                                     _flame_action(bn::create_sprite_animate_action_forever(_flame, 4, bn::sprite_items::jas_flames.tiles_item(), 0, 1, 2))
     {
+        //  Ensure sprite is visible
+        _sprite.set_z_order(-10);
     }
     /**
      * Moves the player based on vertical speed, changing when the boost button is held.
@@ -29,7 +35,7 @@ namespace jas
     void player::update()
     {
         // While the boost button is pressed
-        if (bn::keypad::a_held())
+        if (bn::keypad::a_held()||bn::keypad::b_held()||bn::keypad::up_held())
         {
             // Add BOOST_ACCELERATION to the player's speed.
             engineOn(_gravity*2);
@@ -37,6 +43,7 @@ namespace jas
         // If the player has already crashed, or is about to
         if (crashed() || (on_surface() && at_crash_velocity()))
         {
+            if (!crashed()) explode(); // If the ship is first crashing this frame, then explode.
             // Indicate they are crashed and keep them immobile at surface height
             _crashed = true;
             _sprite.set_y(CRASH_Y);
@@ -49,6 +56,22 @@ namespace jas
             // Move the player based on their current speed.
             _sprite.set_y(_sprite.y() + _vertical_speed);
         }
+        _update_animation();
+    }
+    void player::_update_animation(){
+        if (bn::keypad::a_held() || bn::keypad::b_held() || bn::keypad::up_held())
+        {
+            _flame.set_y(_sprite.y()+12);
+        }
+        else{
+            _flame.set_y(-100);
+        }
+        _flame_action.update();
+    }
+
+    void player::explode()
+    {
+        _sprite.set_item(bn::sprite_items::jas_explosion);
     }
 
     void player::engineOn(bn::fixed engine_thrust)

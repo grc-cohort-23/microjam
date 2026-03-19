@@ -4,6 +4,7 @@
 #include <bn_fixed_point.h>
 #include <bn_sprite_ptr.h>
 #include <bn_display.h>
+#include <bn_sprite_animate_actions.h>
 
 // All game functions/classes/variables/constants scoped to the namespace test
 namespace jas
@@ -40,6 +41,11 @@ namespace jas
         void update();
 
         /**
+         * Replaces the lander sprite with an explosion sprite, for indicating the player has lost
+         */
+        void explode();
+
+        /**
          * When actived, engineOn will increase the player's vertical speed upwards (-y direction)
          */
         void engineOn(bn::fixed engine_thrust);
@@ -65,6 +71,10 @@ namespace jas
          */
         bool crashed() const;
 
+        /*
+        * Updates engine animations 
+        */
+        void _update_animation();
     private:
         // The sprite to display the player
         bn::sprite_ptr _sprite;
@@ -73,6 +83,9 @@ namespace jas
 
         bn::fixed _gravity;
         bool _crashed;
+
+        bn::sprite_ptr _flame;
+        bn::sprite_animate_action<4> _flame_action;
     };
 
 }

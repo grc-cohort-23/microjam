@@ -23,6 +23,7 @@ MJ_GAME_LIST_ADD_GRAPHICS_CREDITS(graphics_credits)
 MJ_GAME_LIST_ADD_MUSIC_CREDITS(music_credits)
 MJ_GAME_LIST_ADD_SFX_CREDITS(sfx_credits)
 
+
 namespace jas
 {
     /**
@@ -36,7 +37,8 @@ namespace jas
     jas_game::jas_game([[maybe_unused]] int completed_games, [[maybe_unused]] const mj::game_data &data)
         : mj::game("jas"),
           _player(player({0, -40}, 0, _recommended_difficulty_multiplier(recommended_difficulty_level(completed_games, data)))),
-          _planet{}
+          _planet{},
+          _text(data.text_generator)
     {
     }
 
@@ -47,7 +49,7 @@ namespace jas
      */
     bn::string<16> jas_game::title() const
     {
-        return "Rover Landing";
+        return "Land the Rover!";
     }
 
     bn::fixed jas_game::_recommended_difficulty_multiplier(mj::difficulty_level difficulty){
