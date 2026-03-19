@@ -8,6 +8,7 @@
 #include "axo/axo_obstacle.h"
 #include "axo/axo_hitbox.h"
 #include "axo/axo_bubble.h"
+#include "bn_regular_bg_ptr.h"
 
 namespace axo
 {
@@ -68,6 +69,8 @@ class axo_aquatic_galaxy_defense : public mj::game
         // The character that the player can move
         player _player;
         
+        bn::regular_bg_ptr _background;
+
         // The obstacles in the game
         bn::vector<obstacle, 12> _obstacles = {};
         // The helper function that allows for obstacles to be destroyed
@@ -75,7 +78,7 @@ class axo_aquatic_galaxy_defense : public mj::game
 
         // Returns progressively slower player speeds the harder the difficulty
         // The slower the player moves, the harder it is to shoot any rocks that come close to them, but the easier it is to avoid them
-        bn::fixed _recommended_player_speed(mj::difficulty_level difficulty);
+        bn::fixed _recommended_obstacle_speed(mj::difficulty_level difficulty);
 };
 
 }

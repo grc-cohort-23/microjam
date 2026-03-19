@@ -2,11 +2,14 @@
 #define AXO_PLAYER_H
 
 #include <bn_fixed_point.h>
-#include <bn_sprite_ptr.h>
+
 #include <bn_display.h>
 #include <bn_rect.h>
 #include <bn_size.h>
+#include <bn_sprite_animate_actions.h>
+#include <bn_sprite_ptr.h>
 #include <bn_vector.h>
+#include <bn_optional.h>
 
 #include "axo/axo_hitbox.h"
 #include "axo/axo_bubble.h"
@@ -14,7 +17,7 @@
 // All game functions/classes/variables/constants scoped to the namespace
 namespace axo {
 
-static constexpr bn::size PLAYER_SIZE = {8, 16};
+static constexpr bn::size PLAYER_SIZE = {16, 32};
 
 /**
  * A character controlled with the d-pad.
@@ -59,6 +62,8 @@ class player {
     private:
         // The sprite to display the player
         bn::sprite_ptr _sprite;
+        // The animation for the sprite
+        bn::optional<bn::sprite_animate_action<2>> _sprite_action;
         // The pixels/frame the player moves in each dimension
         bn::fixed _speed;
         bn::size _size;

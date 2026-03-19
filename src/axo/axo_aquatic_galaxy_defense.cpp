@@ -4,6 +4,7 @@
 #include "bn_display.h"
 #include "bn_sprite_ptr.h"
 #include "bn_sprite_animate_actions.h"
+#include "bn_regular_bg_items_axo_bg.h"
 #include <bn_vector.h>
 
 #include "mj/mj_game_list.h"
@@ -39,15 +40,14 @@ namespace axo
 axo_aquatic_galaxy_defense::axo_aquatic_galaxy_defense([[maybe_unused]] int completed_games, 
     [[maybe_unused]] const mj::game_data& data) :
         mj::game("axo"),
-        _player(player({0, 20}, 
-        _recommended_player_speed(recommended_difficulty_level(completed_games, data)), 
-        PLAYER_SIZE)),
+        _player(player({0, 20}, 2, PLAYER_SIZE)),
+        _background(bn::regular_bg_items::axo_bg.create_bg(0, 0)),
         _obstacles()
         {
-            //spawn 10 obstacles, top of screen with varying x values
+            //spawn 10 obstacles, top of screen with varying y
             for(int i = 0; i < 10; i++) {
                 _obstacles.push_back(obstacle(-bn::display::width() / 2 + 20 + (i * 30), 
-                -bn::display::height(), 1, OBSTACLE_SIZE));
+                -bn::display::height(),_recommended_obstacle_speed(recommended_difficulty_level(completed_games, data)), OBSTACLE_SIZE));
             }
         }
 
@@ -143,13 +143,13 @@ void axo_aquatic_galaxy_defense::fade_out([[maybe_unused]] const mj::game_data& 
     _player.clear_bubbles();
 }
 
-bn::fixed axo_aquatic_galaxy_defense::_recommended_player_speed(mj::difficulty_level difficulty) {
+bn::fixed axo_aquatic_galaxy_defense::_recommended_obstacle_speed(mj::difficulty_level difficulty) {
     if(difficulty == mj::difficulty_level::EASY) {
         return 1;
     } else if (difficulty == mj::difficulty_level::NORMAL) {
-        return .5;
+        return 1.3;
     } 
-    return .3;
+    return 1.5;
 }
 
 }

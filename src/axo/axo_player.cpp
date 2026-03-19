@@ -29,20 +29,38 @@ player::player(bn::fixed_point starting_position, bn::fixed speed, bn::size play
 void player::update() {
     if(bn::keypad::left_held()) {
         _sprite.set_x(_sprite.x() - _speed);
+        _sprite_action = bn::create_sprite_animate_action_forever(_sprite, 5, 
+            bn::sprite_items::axo_axolotl.tiles_item(), 5, 6);
     }
-    if(bn::keypad::right_held()) {
+    else if(bn::keypad::right_held()) {
         _sprite.set_x(_sprite.x() + _speed);
+        _sprite.set_horizontal_flip(true);
+        _sprite_action = bn::create_sprite_animate_action_forever(_sprite, 5, 
+            bn::sprite_items::axo_axolotl.tiles_item(), 5, 6);
     }
-    if(bn::keypad::up_held()) {
+    else if(bn::keypad::up_held()) {
         _sprite.set_y(_sprite.y() - _speed);
+        _sprite_action = bn::create_sprite_animate_action_forever(_sprite, 1, 
+            bn::sprite_items::axo_axolotl.tiles_item(), 1, 2);
     }
-    if(bn::keypad::down_held()) {
+    else if(bn::keypad::down_held()) {
         _sprite.set_y(_sprite.y() + _speed);
+        _sprite_action = bn::create_sprite_animate_action_forever(_sprite, 3, 
+            bn::sprite_items::axo_axolotl.tiles_item(), 3, 4);
+    }
+    else {
+        _sprite_action.reset();
+        _sprite.set_horizontal_flip(false);
+        _sprite.set_tiles(bn::sprite_items::axo_axolotl.tiles_item().create_tiles(0));
+    }
+
+    if(_sprite_action) {
+        _sprite_action->update();
     }
 
     if(bn::keypad::a_pressed() || bn::keypad::b_pressed()) {
         if(bubbles.size() < bubbles.max_size()) {
-            bubbles.push_back(bubble(_sprite.x(), _sprite.y(), BUBBLE_SPEED, 
+            bubbles.push_back(bubble(_sprite.x(), _sprite.y() - 5, BUBBLE_SPEED, 
             BUBBLE_SIZE));
         }
     }
