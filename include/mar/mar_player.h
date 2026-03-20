@@ -43,7 +43,8 @@ namespace mar
     private:
         // The sprite to display the player
         bn::sprite_ptr _sprite;
-        bn::sprite_animate_action<5> _sprite_action;
+        // Only 5 tiles but added 6th ghost tile for animation math
+        bn::sprite_animate_action<6> _sprite_action;
 
         // The pixels/frame the player moves in each dimension
         bn::fixed _speed;
