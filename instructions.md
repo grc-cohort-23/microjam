@@ -1,5 +1,7 @@
 # Instructions
 
+## WARNING: waves that have not yet been assigned on Canvas are subject to change. You can still get an early start on them if you like!
+
 ## Wave 0: Intial Setup
 ### Identifier
 1. With your partners choose a 3 letter unique identifier for your files.

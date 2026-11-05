@@ -1,5 +1,0 @@
-CC0 License
-
-spring_jump_sfx
-
-This sample was created by sodatax for this project.
